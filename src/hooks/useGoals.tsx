@@ -7,10 +7,13 @@ import { useToast } from '@/hooks/use-toast';
 interface Goal {
   id: string;
   title: string;
-  category: 'productivity' | 'health' | 'creativity' | 'finance';
+  category: string; // Changed from union type to string to match database
   progress: number;
   target: number;
   icon: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export function useGoals() {
@@ -43,7 +46,7 @@ export function useGoals() {
     }
   };
 
-  const createGoal = async (goal: Omit<Goal, 'id'>) => {
+  const createGoal = async (goal: Omit<Goal, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => {
     if (!user) return;
 
     try {
@@ -70,7 +73,7 @@ export function useGoals() {
     }
   };
 
-  const updateGoal = async (id: string, updates: Partial<Goal>) => {
+  const updateGoal = async (id: string, updates: Partial<Omit<Goal, 'id' | 'user_id' | 'created_at' | 'updated_at'>>) => {
     if (!user) return;
 
     try {
