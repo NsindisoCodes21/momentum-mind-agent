@@ -9,7 +9,156 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      goals: {
+        Row: {
+          category: string
+          created_at: string | null
+          icon: string | null
+          id: string
+          progress: number | null
+          target: number
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          progress?: number | null
+          target: number
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          progress?: number | null
+          target?: number
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goals_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      habits: {
+        Row: {
+          completed_today: boolean | null
+          created_at: string | null
+          id: string
+          name: string
+          streak: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_today?: boolean | null
+          created_at?: string | null
+          id?: string
+          name: string
+          streak?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_today?: boolean | null
+          created_at?: string | null
+          id?: string
+          name?: string
+          streak?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "habits_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      schedule_items: {
+        Row: {
+          completed: boolean | null
+          created_at: string | null
+          date: string | null
+          id: string
+          task: string
+          time: string
+          type: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          task: string
+          time: string
+          type: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          task?: string
+          time?: string
+          type?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_items_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

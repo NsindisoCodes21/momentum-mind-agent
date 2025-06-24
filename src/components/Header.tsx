@@ -1,9 +1,19 @@
 
 import React from 'react';
-import { Bell, Settings, User } from 'lucide-react';
+import { Bell, Settings, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/auth');
+  };
+
   return (
     <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -16,15 +26,29 @@ export const Header = () => {
           </div>
           
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm">
-              <Bell className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm">
-              <Settings className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm">
-              <User className="w-4 h-4" />
-            </Button>
+            {user ? (
+              <>
+                <span className="text-sm text-gray-600 mr-2">
+                  Welcome back!
+                </span>
+                <Button variant="ghost" size="sm">
+                  <Bell className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="sm">
+                  <Settings className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="sm">
+                  <User className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="sm" onClick={handleSignOut}>
+                  <LogOut className="w-4 h-4" />
+                </Button>
+              </>
+            ) : (
+              <Button onClick={() => navigate('/auth')}>
+                Sign In
+              </Button>
+            )}
           </div>
         </div>
       </div>
