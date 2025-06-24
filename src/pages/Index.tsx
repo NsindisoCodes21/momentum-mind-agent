@@ -5,6 +5,7 @@ import { DashboardGrid } from '@/components/DashboardGrid';
 import { AIAssistant } from '@/components/AIAssistant';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -48,7 +49,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <Header />
+      <div className="flex items-center gap-2 p-4 border-b bg-white/80 backdrop-blur-sm">
+        <SidebarTrigger />
+        <h1 className="text-lg font-semibold">Dashboard</h1>
+      </div>
+      
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Welcome Section */}
